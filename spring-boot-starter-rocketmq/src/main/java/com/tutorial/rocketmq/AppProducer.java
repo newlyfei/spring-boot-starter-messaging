@@ -1,6 +1,5 @@
-package com.tutorial;
+package com.tutorial.rocketmq;
 
-import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -12,18 +11,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * Hello world!
  *
  */
 @SpringBootApplication
-public class App {
-    private static final Logger logger= LoggerFactory.getLogger(App.class);
+public class AppProducer {
+    private static final Logger logger= LoggerFactory.getLogger(AppProducer.class);
 
     public static void main( String[] args ) throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
-        ApplicationContext context = SpringApplication.run(App.class,args);
+        ApplicationContext context = SpringApplication.run(AppProducer.class,args);
 
         DefaultMQProducer defaultMQProducer = context.getBean(DefaultMQProducer.class);
         Message msg = new Message("TEST",// topic
@@ -33,7 +31,5 @@ public class App {
         );
         SendResult result = defaultMQProducer.send(msg);
         System.out.println(result);
-
-        DefaultMQPushConsumer consumer = context.getBean(DefaultMQPushConsumer.class);
     }
 }

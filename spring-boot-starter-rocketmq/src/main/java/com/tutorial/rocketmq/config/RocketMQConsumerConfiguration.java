@@ -54,7 +54,7 @@ public class RocketMQConsumerConfiguration {
         messageListener.setMessageProcessor(messageProcessor);
         consumer.registerMessageListener(messageListener);
         try {
-            consumer.subscribe(topic, this.tag);
+            consumer.subscribe(topic, this.tag);    //订阅topic主体，this.tag为*时订阅全部
             consumer.start();
             logger.info("consumer is start !!! groupName:{},topic:{},namesrvAddr:{}", groupName, topic, namesrvAddr);
         } catch (MQClientException e) {
